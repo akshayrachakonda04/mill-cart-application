@@ -1,5 +1,5 @@
 import CartContext from '../../context/CartContext'
-
+// import NavigationBar from '../../NavigationBar'
 import EmptyCartView from '../EmptyCartView'
 import CartListView from '../CartListView'
 import CartSummary from '../CartSummary'
@@ -18,6 +18,7 @@ const Cart = () => (
       return (
         <>
           {/* <Header /> */}
+          {/* <NavigationBar/> */}
           <div className="cart-container">
             {showEmptyView ? (
               <EmptyCartView />

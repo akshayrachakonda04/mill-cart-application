@@ -1,46 +1,21 @@
-// import React,{useState} from 'react';
+import React,{Component} from 'react';
 // import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-// import NavigationBar from './NavigationBar';
-// import Home from './components/Home/index.js';
-// import Contact from './components/Contact/index.js';
-// import AboutUs from './AboutUs';
-// import Login from './Login';
-// import './styles.css';
-// import RegistrationForm from './RegistrationForm';
-
-// function App() {
-//   // const [loggedIn, setLoggedIn] = useState(false);
-//   return (
-//     <>
-//     <Router>
-//     <NavigationBar />
-//       <div>
-//         <Routes>
-//           <Route path="/" exact element={<Home/>} />
-//           <Route path="/contact" element={<Contact/>} />
-//           <Route path="/about" element={<AboutUs/>} />
-//           <Route path='/login' element={<Login/>}/>
-//           <Route path='/RegistrationForm' element={<RegistrationForm/>}></Route>
-//         </Routes>
-//       </div>
-//     </Router>
-    
-//     </>
-//   );
-// }
-// export default App;
-
-
-import {Component} from 'react';
-import {Route, Switch} from 'react-router-dom';
-import Home from './components/Home'
-import Products from './components/Products'
-import ProductItemDetails from './components/ProductItemDetails'
-import Cart from './components/Cart'
-import CartContext from './context/CartContext'
-
+import { Switch, Routes, Route } from "react-router-dom";
+import NavigationBar from './NavigationBar';
+import Home from './components/Home/index.js';
+import Contact from './components/Contact/index.js';
+import AboutUs from './AboutUs';
+import Login from './Login';
+import Products from './components/Products/index.js';
+import ProductItemDetails from './components/ProductItemDetails/index.js';
+import './styles.css';
+import RegistrationForm from './RegistrationForm';
+import Cart from './components/Cart/index.js';
+import CartContext from './context/CartContext.js';
+import MurmuraProducts from './components/MurmuraProducts/index.js';
+import MurmuraProductItemDetails from './components/MurmuraProductItemDetails/index.js';
+import Payment from './components/Payment/index.js';
 import './App.css'
-// import Payment from './components/Payment'
 
 class App extends Component {
   state = {
@@ -129,16 +104,22 @@ class App extends Component {
           removeAllCartItems: this.removeAllCartItems,
         }}
       >
+        <NavigationBar/>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/products" component={Products} />
-          <Route
-            exact
-            path="/products/:id"
-            component={ProductItemDetails}
-          />
-          <Route exact path="/cart" component={Cart} />
+         
           {/* <Route exact path="/payments" component={Payment}/> */}
+          <Route exact path="/" component={Home} />
+          <Route exact path="/contact" component={Contact} />
+          <Route exact path="/about" component={AboutUs} />
+          <Route exact path='/login' component={Login}/>
+          <Route exact path="/products" component={Products}/>
+          <Route exact path="/murmura-products" component={MurmuraProducts} />
+          <Route exact path="/products/:id" component={ProductItemDetails}/>
+          <Route exact path="/murmura-products/:id" component={MurmuraProductItemDetails}/>
+          <Route exact path='/RegistrationForm' component={RegistrationForm}/>
+          <Route exact path="/cart" component={Cart} />
+          <Route exact path="/payments" component={Payment}/>
         </Switch>
       </CartContext.Provider>
     )

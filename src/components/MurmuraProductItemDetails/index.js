@@ -7,7 +7,7 @@ import './index.css'
 
 
 
-class ProductItemDetails extends Component{
+class MurmuraProductItemDetails extends Component{
     state={productItemDetails:{},rate:0,count:0,itemsCount:0}
 
     componentDidMount(){
@@ -18,7 +18,7 @@ class ProductItemDetails extends Component{
         const {match}=this.props 
         const {params}=match 
         const {id}=params
-        const apiUrl=`http://localhost:3000/gram-products/${id}`
+        const apiUrl=`http://localhost:3000/murmura-products/${id}`
         const options={
             method:'GET'
         }
@@ -92,4 +92,4 @@ class ProductItemDetails extends Component{
     }
 }
 
-export default ProductItemDetails
+export default MurmuraProductItemDetails

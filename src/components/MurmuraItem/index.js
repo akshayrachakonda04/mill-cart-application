@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom'
 import { FaArrowRight } from "react-icons/fa";
 import './index.css'
 
-const ProductItem=props=>{
+const MurmuraItem=props=>{
     const {productItem}=props 
     const {imageUrl,millName,price,id,productName,brandName,description}=productItem
     return(
-        <Link to= {`/products/${id}`} className="link-text">
+        <Link to= {`/murmura-products/${id}`} className="link-text">
             <li className='list-items'>
                 <img src={imageUrl} alt="item" className='product-image'/>
                 <h1 className='product-title'>{millName}</h1>
@@ -19,4 +19,4 @@ const ProductItem=props=>{
     )
 }
 
-export default ProductItem
+export default MurmuraItem

@@ -1,6 +1,7 @@
 import {Component} from 'react'
 // import Header from '../Header'
-import ProductItem from '../ProductItem'
+// import ProductItem from '../ProductItem'
+import MurmuraItem from '../MurmuraItem';
 import Loader from 'react-loader-spinner'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
@@ -13,7 +14,7 @@ const apiStatusConstants={
     success:'SUCCESS'
 }
 
-class Products extends Component{
+class MurmuraProducts extends Component{
     state={productsList:[],apiStatus:apiStatusConstants.initial}
 
     componentDidMount(){
@@ -22,7 +23,7 @@ class Products extends Component{
 
     getProductItems=async()=>{
         this.setState({apiStatus:apiStatusConstants.inProgress})
-        const apiUrl='http://localhost:3000/gram-products'
+        const apiUrl='http://localhost:3000/murmura-products'
         const options={
             method:'GET'
         }
@@ -47,7 +48,7 @@ class Products extends Component{
                 {/* <Header/> */}
                 <h1 className='product-head'>Products</h1>
                 <ul type="none" className='products-container'>
-                    {productsList.map((each)=><ProductItem productItem={each} key={each.id}/>)}
+                    {productsList.map((each)=><MurmuraItem productItem={each} key={each.id}/>)}
                 </ul>
             </div>
     )}
@@ -72,4 +73,4 @@ class Products extends Component{
     }
 }
 
-export default Products
+export default MurmuraProducts

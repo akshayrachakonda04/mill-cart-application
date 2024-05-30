@@ -1,87 +1,101 @@
-import React,{useState} from "react";
-import RegistrationForm from "./RegistrationForm";
-import { Link } from "react-router-dom";
-import img3 from "./pictures/img3.jpg"
-import user from './db.json';
+import React, { Component } from "react";
+import { Link,Redirect } from "react-router-dom";
+import img3 from "./pictures/img3.jpg";
+import Cookies from 'js-cookie'
 
-function Login({setLoggedIn}){
-    const [formData,setFormData]=useState({email:'',password:''});
-    const [error, setError] = useState('');
+class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      formData: { email: '', password: '' },
+      error: '',
+      displayMsg: '',
+      loggedIn: false
+    };
+  }
 
-    const handlechange=(e)=>{
-        const {name,value}= e.target;
-        setFormData({...formData,[name]:value})
-    }
-    const handleSubmit=(e)=>{
-        e.preventDefault();
-        // alert("Congrats you are logged in.");
-        // if (validate()){
-        //     // alert("Proceed");
-        // // }
-        //     fetch("https://localhost:4000/user/").then((res)=>{
-        //     return res.json();
-        //     }).then((resp)=>{
-        //     console.log(resp)
-        //     }).catch((err)=>{
-        //     toast.error('Login Failed due to:'+err.message);
-        //     });
-        // }
-    }
-    const handleClick=()=>{
-        const users = user.find(users => users.email === formData.email && users.password === formData.password);
-    if (users) {
-      setLoggedIn(true);
-    } else {
-      setError('Invalid username or password');
-    }
-    }
-    // const validate = () =>{
-    //     let result=true;
-    //     if(formData.email==='' || formData.email===null){
-    //         result=false;
-    //         toast.warning("Please enter login credentials");
-    //     }
-    //     if(formData.password==="" || formData.password===null){
-    //         result=false;
-    //         toast.warning("Please enter Password");
-    //     }
-    //     return result;
-    // }
-    return(
-        <div className="logc" style={{backgroundImage:`URL(${img3})`}}>
-            <div className="logc2">
-                <center> <h2> Login </h2></center>
-               <div className="logc3">
-                <form onSubmit={handleSubmit}> 
-                <div className="inside">
-                    <label>
-                        Email:
-                    </label>
+  handleChange = (e) => {
+    const { name, value } = e.target;
+    this.setState(prevState => ({
+      formData: {
+        ...prevState.formData,
+        [name]: value
+      }
+    }));
+  };
 
+  handleClick = async (e) => {
+    e.preventDefault();
+    const { email, password } = this.state.formData;
+
+    try {
+      const apiUrl = 'http://localhost:3000/login';
+      const options = {
+        method: "POST",
+        body: JSON.stringify({ email, password }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      };
+      const response = await fetch(apiUrl, options);
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log("logged in successfully");
+        this.setState({ loggedIn: true });
+        Cookies.set("jwt_token", data.jwtToken, {expires:30})
+        const {history}=this.props
+        history.push("/")
+      } else {
+        this.setState({ error: 'Invalid email or password' });
+      }
+
+      if (data.display_msg) {
+        this.setState({ displayMsg: data.display_msg });
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+    }
+  };
+
+  render() {
+    const { formData, error, displayMsg,loggedIn } = this.state;
+    if(loggedIn){
+        <Redirect to="/"/>
+    }
+
+    return (
+      <div className="logc" style={{ backgroundImage: `URL(${img3})` }}>
+        <div className="logc2">
+          <center><h2>Login</h2></center>
+          <div className="logc3">
+            <form>
+              <div className="inside">
+                <label>Email:</label>
                 <div>
-                    <input type="emial" name="email" value={formData.email} onChange={handlechange} required/>
+                  <input type="email" name="email" value={formData.email} onChange={this.handleChange} required />
                 </div>
-                <label>
-                    Password:
-                </label>
+                <label>Password:</label>
                 <div>
-                    <input type="password" name="password" value={formData.password} onChange={handlechange} required/>
-                </div> 
+                  <input type="password" name="password" value={formData.password} onChange={this.handleChange} required />
                 </div>
-                <div className="butn">
-                    <div>
-                    <button className="btn1" type="submit" onClick={handleClick} >Login</button>
-                    {error && <div>{error}</div>}
-                    </div>
+                {displayMsg && <p>{displayMsg}</p>}
+              </div>
+              <div className="butn">
+                <div>
+                  <button className="btn1" type="submit" onClick={this.handleClick}>Login</button>
+                  {/* {error && <div>{error}</div>} */}
                 </div>
-                </form>
-                </div>
-            </div>
-            <div className="acc">
-                    <p> <center>Don't hava an account ? <Link to ="/RegistrationForm">Register</Link> </center></p>
-            </div>
+              </div>
+            </form>
+          </div>
         </div>
-    )
+        <div className="acc">
+          <p><center>Don't have an account? <Link to="/RegistrationForm">Register</Link></center></p>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default Login;

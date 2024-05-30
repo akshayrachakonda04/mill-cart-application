@@ -1,138 +1,160 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import Login from "./Login";
 import { Link } from "react-router-dom";
 import img3 from "./pictures/img3.jpg";
-function RegistrationForm() {
-  const [formData, setFormData] = useState({
-    userName: "",
-    email: "",
-    companyName: "",
-    gstIn: "",
-    password: "",
-    ConfirmPassword: "",
-  });
-  const handleChange = (e) => {
+
+class RegistrationForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      formData: {
+        userName: "",
+        email: "",
+        companyName: "",
+        gstIn: "",
+        password: "",
+        ConfirmPassword: "",
+      },
+      message: "",
+    };
+  }
+
+  componentDidMount() {
+    // Fetch message from backend and set it to the state
+    fetch("http://localhost:3000/display_msg")
+      .then((response) => response.json())
+      .then((json) => this.setState({ message: json.display_msg }));
+  }
+
+  handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    this.setState((prevState) => ({
+      formData: { ...prevState.formData, [name]: value },
+    }));
   };
-  const handleSubmit = (e) => {
+
+  handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:4000/user", {
+    fetch("http://localhost:3000/register", {
       method: "POST",
       body: JSON.stringify({
-        userName: formData.userName,
-        email: formData.email,
-        companyName: formData.companyName,
-        gstIn: formData.gstIn,
-        password: formData.password,
-        ConfirmPassword: formData.ConfirmPassword,
+        username: this.state.formData.userName,
+        email: this.state.formData.email,
+        companyName: this.state.formData.companyName,
+        gst: this.state.formData.gstIn,
+        password: this.state.formData.password,
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
     })
       .then((response) => response.json())
-      .then((json) => console.log(json));
-    alert("Congrats Your are successfully created a new account");
+      .then((json) => this.setState({ message: json.display_msg }));
   };
-  return (
-    <div className="logc11" style={{ backgroundImage: `URL(${img3})` }}>
-      <div className="logc22">
-        <center>
-          {" "}
-          <h2> Register </h2>
-        </center>
-        <form onSubmit={handleSubmit}>
-          <div className="inside2">
-            <label>User Name: </label>
-            <div>
-              <input
-                name="userName"
-                type="text"
-                value={formData.userName}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div>
-              <label>Email:</label>
-              <div>
-                <input
-                  name="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            </div>
-            <div>
-              <label>Company Name:</label>
-              <div>
-                <input
-                  name="text"
-                  type="text"
-                  value={formData.companyName}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            </div>
-            <div>
-              <label>Gst IN:</label>
-              <div>
-                <input
-                  name="text"
-                  type="text"
-                  value={formData.gstIn}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            </div>
-            <div>
-              <label>Password:</label>
-              <div>
-                <input
-                  type="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            </div>
-            <div>
-              <label>Confirm Password:</label>
-              <div>
-                <input
-                  type="Password"
-                  name="ConfirmPassword"
-                  value={formData.ConfirmPassword}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            </div>
-          </div>
-          <div className="butn">
-            <div>
-              <button className="btn1" type="submit">
-                Register
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div className="acc">
-        <p>
-          {" "}
+
+  render() {
+    const { formData, message } = this.state;
+
+    return (
+      <div className="logc11" style={{ backgroundImage: `URL(${img3})` }}>
+        <div className="logc22">
           <center>
-            Already hava an account ? <Link to="/Login">Login</Link>{" "}
+            <h2> Register </h2>
           </center>
-        </p>
+         
+          <form onSubmit={this.handleSubmit}>
+            <div className="inside2">
+              <label>User Name: </label>
+              <div>
+                <input
+                  name="userName"
+                  type="text"
+                  value={formData.userName}
+                  onChange={this.handleChange}
+                  required
+                />
+              </div>
+              <div>
+                <label>Email:</label>
+                <div>
+                  <input
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={this.handleChange}
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label>Company Name:</label>
+                <div>
+                  <input
+                    name="companyName"
+                    type="text"
+                    value={formData.companyName}
+                    onChange={this.handleChange}
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label>Gst IN:</label>
+                <div>
+                  <input
+                    name="gstIn"
+                    type="text"
+                    value={formData.gstIn}
+                    onChange={this.handleChange}
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label>Password:</label>
+                <div>
+                  <input
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={this.handleChange}
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label>Confirm Password:</label>
+                <div>
+                  <input
+                    type="password"
+                    name="ConfirmPassword"
+                    value={formData.ConfirmPassword}
+                    onChange={this.handleChange}
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="butn">
+              <div>
+                <button className="btn1" type="submit">
+                  Register
+                </button>
+              </div>
+            </div>
+          </form>
+          {message && <p>{message}</p>}
+        </div>
+        <div className="acc">
+          <p>
+            <center>
+              Already have an account? <Link to="/Login">Login</Link>{" "}
+            </center>
+          </p>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
+
 export default RegistrationForm;

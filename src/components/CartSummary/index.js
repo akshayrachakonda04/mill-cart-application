@@ -21,7 +21,7 @@ const CartSummary = () => (
             </h1>
             <p className="total-items">{cartList.length} Items in cart</p>
             <Link to="/payments" className="link-texts">
-              <button type="button" className="checkout-button d-sm-none">
+              <button type="button" className="checkout-button">
               Checkout
               </button>
             </Link>
