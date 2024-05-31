@@ -69,8 +69,8 @@ class ProductItemDetails extends Component{
                         <p className="details-des">{description}</p>
                         <p className="para"><FaShoppingBag/> {brandName} by {millName} </p>
                         <p className="para"><FaRupeeSign/> {price}/-</p>
-                        <p className="para"><FaStar className="star-icon"/> {rate}</p>
-                        <p className="para"><IoPeople /> {count}</p>  
+                        {/* <p className="para"><FaStar className="star-icon"/> {rate}</p>
+                        <p className="para"><IoPeople /> {count}</p>   */}
                         <div className="items-container">
                              <button type="button" className="minus-plus-btn" onClick={this.minusBtn}>
                                 <FaMinus/>

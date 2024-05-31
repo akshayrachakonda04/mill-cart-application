@@ -7,21 +7,25 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const url = 'mongodb://localhost:27017';
+const url = 'mongodb+srv://2211cs010487:2211cs010487@cluster0.izeuq36.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 const dbName = 'mill';
-let db;
+const port = 3000;
 
-const client = new MongoClient(url);
+let db;
 
 const initializeDBAndServer = async () => {
   try {
+    const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
     await client.connect();
+    console.log('Connected to MongoDB');
+
     db = client.db(dbName);
-    app.listen(3000, () => {
-      console.log("Server Running at http://localhost:3000/");
+
+    app.listen(port, () => {
+      console.log(`Server running at http://localhost:${port}/`);
     });
   } catch (e) {
-    console.log(`DB Error: ${e.message}`);
+    console.error(`DB Error: ${e.message}`);
     process.exit(1);
   }
 };

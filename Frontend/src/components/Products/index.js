@@ -1,10 +1,7 @@
 import {Component} from 'react'
-// import Header from '../Header'
 import ProductItem from '../ProductItem'
 import Loader from 'react-loader-spinner'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-
-
 import './index.css'
 
 const apiStatusConstants={
