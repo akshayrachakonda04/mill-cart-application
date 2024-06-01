@@ -15,6 +15,7 @@ import CartContext from './context/CartContext.js';
 import MurmuraProducts from './components/MurmuraProducts/index.js';
 import MurmuraProductItemDetails from './components/MurmuraProductItemDetails/index.js';
 import Payment from './components/Payment/index.js';
+import ProtectedRoute from './components/ProtectedRoute/index.js';
 import './App.css'
 
 class App extends Component {
@@ -118,7 +119,7 @@ class App extends Component {
           <Route exact path="/products/:id" component={ProductItemDetails}/>
           <Route exact path="/murmura-products/:id" component={MurmuraProductItemDetails}/>
           <Route exact path='/RegistrationForm' component={RegistrationForm}/>
-          <Route exact path="/cart" component={Cart} />
+          <ProtectedRoute exact path="/cart" component={Cart} />
           <Route exact path="/payments" component={Payment}/>
         </Switch>
       </CartContext.Provider>

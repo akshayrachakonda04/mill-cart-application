@@ -46,6 +46,7 @@ class Login extends Component {
         Cookies.set("jwt_token", data.jwtToken, {expires:30})
         const {history}=this.props
         history.push("/")
+        window.location.reload(false);
       } else {
         this.setState({ error: 'Invalid email or password' });
       }

@@ -1,13 +1,15 @@
+require("dotenv").config()
 const express = require("express");
 const { MongoClient, ObjectId } = require("mongodb");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 
+
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-const url = 'mongodb+srv://2211cs010487:2211cs010487@cluster0.izeuq36.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+const url = process.env.URLPATH;
 const dbName = 'mill';
 const port = 3000;
 
