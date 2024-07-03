@@ -18,7 +18,7 @@ class MurmuraProductItemDetails extends Component{
         const {match}=this.props 
         const {params}=match 
         const {id}=params
-        const apiUrl=`http://localhost:3000/murmura-products/${id}`
+        const apiUrl=`https://mill-cart-application-backend.onrender.com/murmura-products/${id}`
         const options={
             method:'GET'
         }

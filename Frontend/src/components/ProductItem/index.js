@@ -13,10 +13,9 @@ const ProductItem=props=>{
                 <p className='product-price'>{price}/- per Kg</p>
                 <p>{productName} by {brandName}</p>
                 <p>{description}</p>
-                <p className='more-details-text'>More Details <FaArrowRight/></p>
+                <h6 className='more-details-text'>More Details <FaArrowRight/></h6>
             </li>
         </Link>
     )
 }
-
 export default ProductItem

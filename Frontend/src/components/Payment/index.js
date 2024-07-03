@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import './index.css'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-// import Header from '../Header';
-
 const Payment = () => {
   const [billingAddress, setBillingAddress] = useState({
     name: '',
@@ -24,11 +22,8 @@ const Payment = () => {
     e.preventDefault();
     setOrderConfirmed(true);
   };
-
-
   return (
     <div>
-        {/* <Header/> */}
         <div className='main-container'>
       {orderConfirmed ? (
         <div className='success-container'>

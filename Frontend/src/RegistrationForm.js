@@ -20,8 +20,8 @@ class RegistrationForm extends Component {
   }
 
   componentDidMount() {
-    // Fetch message from backend and set it to the state
-    fetch("http://localhost:3000/display_msg")
+    
+    fetch("https://mill-cart-application-backend.onrender.com/display_msg")
       .then((response) => response.json())
       .then((json) => this.setState({ message: json.display_msg }));
   }
@@ -35,7 +35,7 @@ class RegistrationForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:3000/register", {
+    fetch("https://mill-cart-application-backend.onrender.com/register", {
       method: "POST",
       body: JSON.stringify({
         username: this.state.formData.userName,

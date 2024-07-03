@@ -11,12 +11,13 @@
 
 .details-text-container{
     align-self: flex-end;
-    margin: 10px;
+    margin: 105px;
+    margin-left: 20px;
 }
 
 .details-image{
-    height:500px;
-    width: 650px;
+    height:350px;
+    width: 350px;
     border-radius: 10px;
     margin: 10px;
 }
@@ -34,10 +35,6 @@
     margin: 10px;
 }
 
-.star-icon{
-    color: gold;
-}
-
 .buttons{
     color: #ffffff;
     font-family: 'Roboto';
@@ -52,10 +49,6 @@
     padding-right: 20px;
     outline: none;
     cursor: pointer;
-}
-
-.para{
-    margin: 10px;
 }
 
 .minus-plus-btn{

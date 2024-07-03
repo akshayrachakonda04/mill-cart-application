@@ -1,10 +1,8 @@
 import React,{Component} from 'react';
-// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Switch, Routes, Route } from "react-router-dom";
+import { Switch,Route } from "react-router-dom";
 import NavigationBar from './NavigationBar';
 import Home from './components/Home/index.js';
 import Contact from './components/Contact/index.js';
-import AboutUs from './AboutUs';
 import Login from './Login';
 import Products from './components/Products/index.js';
 import ProductItemDetails from './components/ProductItemDetails/index.js';
@@ -108,11 +106,8 @@ class App extends Component {
         <NavigationBar/>
         <Switch>
           <Route exact path="/" component={Home} />
-         
-          {/* <Route exact path="/payments" component={Payment}/> */}
           <Route exact path="/" component={Home} />
           <Route exact path="/contact" component={Contact} />
-          <Route exact path="/about" component={AboutUs} />
           <Route exact path='/login' component={Login}/>
           <Route exact path="/products" component={Products}/>
           <Route exact path="/murmura-products" component={MurmuraProducts} />

@@ -19,7 +19,7 @@ class Products extends Component{
 
     getProductItems=async()=>{
         this.setState({apiStatus:apiStatusConstants.inProgress})
-        const apiUrl='http://localhost:3000/gram-products'
+        const apiUrl='https://mill-cart-application-backend.onrender.com/gram-products'
         const options={
             method:'GET'
         }
@@ -41,7 +41,6 @@ class Products extends Component{
         const {productsList}=this.state 
         return(
         <div className='products-container-main'>
-                {/* <Header/> */}
                 <h1 className='product-head'>Products</h1>
                 <ul type="none" className='products-container'>
                     {productsList.map((each)=><ProductItem productItem={each} key={each.id}/>)}

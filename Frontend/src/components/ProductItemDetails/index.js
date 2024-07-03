@@ -1,8 +1,6 @@
 import { Component } from "react";
-import { FaShoppingBag,FaRupeeSign,FaStar,FaMinus,FaPlus} from "react-icons/fa";
-import { IoPeople } from "react-icons/io5";
+import { FaShoppingBag,FaRupeeSign,FaMinus,FaPlus} from "react-icons/fa";
 import CartContext from "../../context/CartContext";
-// import Header from "../Header";
 import './index.css'
 
 
@@ -18,13 +16,12 @@ class ProductItemDetails extends Component{
         const {match}=this.props 
         const {params}=match 
         const {id}=params
-        const apiUrl=`http://localhost:3000/gram-products/${id}`
+        const apiUrl=`https://mill-cart-application-backend.onrender.com/gram-products/${id}`
         const options={
             method:'GET'
         }
         const response=await fetch(apiUrl,options)
         const data=await response.json()
-        // console.log(data.image_url)
         const filteredData={
             id:data._id,
             imageUrl:data.image_url,
@@ -60,8 +57,7 @@ class ProductItemDetails extends Component{
                             addCartItem({...productItemDetails,itemsCount})
                         }
                         return(
-                            <div>
-                {/* <Header/> */}
+                            <div> 
                 <div className="details-container">
                     <img src={imageUrl} alt="item" className="details-image"/>
                     <div className="details-text-container">
@@ -69,8 +65,6 @@ class ProductItemDetails extends Component{
                         <p className="details-des">{description}</p>
                         <p className="para"><FaShoppingBag/> {brandName} by {millName} </p>
                         <p className="para"><FaRupeeSign/> {price}/-</p>
-                        {/* <p className="para"><FaStar className="star-icon"/> {rate}</p>
-                        <p className="para"><IoPeople /> {count}</p>   */}
                         <div className="items-container">
                              <button type="button" className="minus-plus-btn" onClick={this.minusBtn}>
                                 <FaMinus/>

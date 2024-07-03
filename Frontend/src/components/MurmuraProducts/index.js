@@ -23,7 +23,7 @@ class MurmuraProducts extends Component{
 
     getProductItems=async()=>{
         this.setState({apiStatus:apiStatusConstants.inProgress})
-        const apiUrl='http://localhost:3000/murmura-products'
+        const apiUrl='https://mill-cart-application-backend.onrender.com/murmura-products'
         const options={
             method:'GET'
         }

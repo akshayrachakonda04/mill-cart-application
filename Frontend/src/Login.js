@@ -29,7 +29,7 @@ class Login extends Component {
     const { email, password } = this.state.formData;
 
     try {
-      const apiUrl = 'http://localhost:3000/login';
+      const apiUrl = 'https://mill-cart-application-backend.onrender.com/login';
       const options = {
         method: "POST",
         body: JSON.stringify({ email, password }),
@@ -60,9 +60,9 @@ class Login extends Component {
   };
 
   render() {
-    const { formData, error, displayMsg,loggedIn } = this.state;
+    const { formData, displayMsg,loggedIn } = this.state;
     if(loggedIn){
-        <Redirect to="/"/>
+        return <Redirect to="/"/>
     }
 
     return (
@@ -85,7 +85,6 @@ class Login extends Component {
               <div className="butn">
                 <div>
                   <button className="btn1" type="submit" onClick={this.handleClick}>Login</button>
-                  {/* {error && <div>{error}</div>} */}
                 </div>
               </div>
             </form>
